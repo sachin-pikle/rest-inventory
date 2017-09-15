@@ -11,7 +11,7 @@ push:
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        tag: $WERCKER_GIT_COMMIT
+        tag: latest
         repository: $DOCKER_REPOSITORY
         registry: https://index.docker.io/v1/
         cmd: java -jar  /pipeline/source/target/rest-inventory-mongodb-0.1.0.jar
