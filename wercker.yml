@@ -15,3 +15,9 @@ push:
         repository: $DOCKER_REPOSITORY
         registry: https://index.docker.io/v1/
         cmd: java -jar  /pipeline/source/target/rest-inventory-mongodb-0.1.0.jar
+restart:
+  steps:
+    # Restart Docker on OCCS using webhook
+    - script:
+        name: curl POST
+        code: curl -k -X POST $DEPLOYMENT_WEBHOOK
