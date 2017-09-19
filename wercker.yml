@@ -29,7 +29,7 @@ register:
         code: |
           INVENTORY_CONTEXTPATH=$(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
           echo 'Context path=' $INVENTORY_CONTEXTPATH
-          INVENTORY_URL=$K8S_HOST$INVENTORY_CONTEXTPATH
+          INVENTORY_URL=$CONTAINER_HOST$INVENTORY_CONTEXTPATH
           echo 'Inventory URL=' $INVENTORY_URL
           curl -v -X PUT \
             $APIP_URL \
