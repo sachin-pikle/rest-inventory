@@ -28,5 +28,47 @@ register:
         name: Register Inventory REST service in APIP
         code: |
           INVENTORY_CONTEXTPATH=$(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
-          echo $INVENTORY_CONTEXTPATH
+          echo 'Context path=' $INVENTORY_CONTEXTPATH
+          INVENTORY_URL=$K8S_HOST$INVENTORY_CONTEXTPATH
+          echo 'Inventory URL=' $INVENTORY_URL
+          curl -v -X PUT \
+            $APIP_URL \
+            -H 'authorization: Basic Q29udGludW91c0ludGVncmF0aW9uOndlbGNvbWUx' \
+            -H 'cache-control: no-cache' \
+            -H 'content-type: application/json' \
+            -d '{
+            "description": "test service description",
+            "implementation": {
+                  "executions": {
+                      "request": [
+                          "1"
+                      ],
+                      "response": [
+                          "2"
+                      ]
+                  },
+                  "policies": [
+                      {
+                          "id": "1",
+                          "type": "o:BackendRequest",
+                          "version": "1.0",
+                          "config": {
+                              "endpoints": [
+                                  {
+                                      "serviceAccount": "109",
+                                      "useProxy": false,
+                                      "url": "http://'"$INVENTORY_URL"'"
+                                  }
+                              ]
+                          }
+                      },
+                      {
+                          "id": "2",
+                          "type": "o:BackendResponse",
+                          "version": "1.0",
+                          "config": {}
+                      }
+                  ]
+              }
+            }'
           
