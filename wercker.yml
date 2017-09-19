@@ -27,6 +27,6 @@ register:
     - script:
         name: Register Inventory REST service in APIP
         code: |
-          INVENTORY_CONTEXTPATH = $(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
+          INVENTORY_CONTEXTPATH=$(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
           echo $INVENTORY_CONTEXTPATH
           
