@@ -9,7 +9,7 @@ build:
 
 push:
   steps:
-    # Push to public docker repo Container Registry
+    # Push to public docker repo Container Registry (CR)
     - internal/docker-push:
         tag: latest
         repository: $CR_REPOSITORY
