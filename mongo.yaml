@@ -1,0 +1,53 @@
+#
+# Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
+#
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rest-inventory-mongo
+  labels:
+    run: rest-inventory-mongo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      run: rest-inventory-mongo
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: rest-inventory-mongo
+    spec:
+      containers:
+      - image: mongo:3.2.8
+        imagePullPolicy: Always
+        name: rest-inventory-mongo
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-inventory-mongo
+  labels:
+    run: rest-inventory-mongo
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
+  selector:
+    run: rest-inventory-mongo
+  sessionAffinity: None
+  type: NodePort
