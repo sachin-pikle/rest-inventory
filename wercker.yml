@@ -2,7 +2,7 @@ box: combient/java-mvn
 
 build:
   steps:
-    # Build Inventory REST application
+    # Build Inventory REST application 
     - script:
         name: Maven install
         code: mvn install
