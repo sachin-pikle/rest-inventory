@@ -21,13 +21,7 @@ deploy-to-cluster:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete deployment rest-inventory
-    
-    - kubectl:
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: create -f $WERCKER_ROOT/inventory-deployment.yaml
+        command: create -f inventory-deployment.yaml -f inventory-service.yaml
 
 register:
   steps:
