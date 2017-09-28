@@ -9,7 +9,7 @@ build:
 
 push:
   steps:
-    # Push to public docker repo Container Registry (CR)
+    # Push to public docker Container Registry (CR)
     - internal/docker-push:
         tag: ${WERCKER_GIT_BRANCH}-$WERCKER_GIT_COMMIT
         repository: $CR_REPOSITORY
