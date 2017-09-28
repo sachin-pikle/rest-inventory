@@ -45,11 +45,24 @@ spec:
   ports:
   - name: http
     protocol: TCP
-    port: 8999
+    port: 8080
     targetPort: 8080
   selector:
     run: rest-inventory
     commit: ${WERCKER_GIT_COMMIT}
   sessionAffinity: None
   type: LoadBalancer
- 
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ # name: rest-inventory-ingress
+spec:
+  rules:
+  - host: rest-inventory.example.domain
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: rest-inventory
+ servicePort: 8080
