@@ -11,7 +11,7 @@ push:
   steps:
     # Push to public docker repo Container Registry (CR)
     - internal/docker-push:
-        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+        tag: $WERCKER_GIT_COMMIT
         repository: $CR_REPOSITORY
         cmd: java -jar  /pipeline/source/target/rest-inventory-mongodb-0.1.0.jar
 
