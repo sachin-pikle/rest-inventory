@@ -11,7 +11,7 @@ push:
   steps:
     # Push to public docker repo Container Registry (CR)
     - internal/docker-push:
-        tag: latest
+        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         repository: $CR_REPOSITORY
         cmd: java -jar  /pipeline/source/target/rest-inventory-mongodb-0.1.0.jar
 
@@ -21,13 +21,7 @@ deploy-to-cluster:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete deployment rest-inventory
-    
-    - kubectl:
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: create -f inventory-deployment.yaml
+        command: apply -f inventory.yaml
 
 register:
   steps:
