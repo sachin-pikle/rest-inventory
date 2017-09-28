@@ -17,6 +17,16 @@ push:
 
 deploy-to-cluster:
   steps:
+    # https://github.com/wercker/step-bash-template
+    # This Wercker step will look for files in our repo with a .template extension.
+    # It will expand any environment variables in those files, then remove the
+    # template extension.
+    - bash-template
+    
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat inventory.yaml
+
     - kubectl:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
