@@ -51,7 +51,7 @@ spec:
     run: rest-inventory
     commit: ${WERCKER_GIT_COMMIT}
   sessionAffinity: None
-  type: LoadBalancer
+  type: NodePort
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -59,7 +59,7 @@ metadata:
  # name: rest-inventory-ingress
 spec:
   rules:
-  - host: rest-inventory.example.domain
+  - host: rest-inventory.oracle.com
     http:
       paths:
       - path:
