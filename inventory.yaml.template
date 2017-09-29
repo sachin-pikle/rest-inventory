@@ -11,6 +11,7 @@ metadata:
     commit: ${WERCKER_GIT_COMMIT}
 spec:
   replicas: 1
+  revisionHistoryLimit: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
