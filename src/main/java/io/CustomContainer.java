@@ -14,7 +14,7 @@ public class CustomContainer implements EmbeddedServletContainerCustomizer {
 		container.setPort(8080);
 		
 		// set the context root
-		container.setContextPath("/api/v2");
+		container.setContextPath("/api/v3");
 
 	}
 
