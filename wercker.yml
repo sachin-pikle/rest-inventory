@@ -59,12 +59,12 @@ register:
     - script:
         name: Register Inventory REST service in APIP
         code: |
-          echo 'Container host=' $CONTAINER_HOST
-          CONTAINER_PORT=8999
-          echo 'Container host=' $CONTAINER_PORT
+          #echo 'Container host=' $CONTAINER_HOST
+          #CONTAINER_PORT=8999
+          #echo 'Container host=' $CONTAINER_PORT
           INVENTORY_CONTEXTPATH=$(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
           echo 'Context path=' $INVENTORY_CONTEXTPATH
-          INVENTORY_URL=$CONTAINER_HOST:$CONTAINER_PORT$INVENTORY_CONTEXTPATH
+          INVENTORY_URL=$CONTAINER_HOST$INVENTORY_CONTEXTPATH
           echo 'Inventory URL=' $INVENTORY_URL
           curl -v -X PUT \
             $APIP_URL \
